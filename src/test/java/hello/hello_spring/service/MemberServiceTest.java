@@ -45,7 +45,7 @@ class MemberServiceTest {
     }
 
     @Test
-    public void 중복회원예외(){
+    public void duplicateMemberException(){
         //given
         Member member1 = new Member();
         member1.setName("hello");
@@ -57,12 +57,12 @@ class MemberServiceTest {
         memberService.join(member1);
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
 
-        assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+        assertThat(e.getMessage()).isEqualTo("This member already exists.");
 //        try {
 //            memberService.join(member2);
 //            fail();
 //        }catch (IllegalStateException e){
-//            assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+//            assertThat(e.getMessage()).isEqualTo("This member already exists.");
 //        }
         //then
     }
