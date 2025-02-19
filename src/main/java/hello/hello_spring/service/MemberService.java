@@ -9,37 +9,37 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+
 public class MemberService {
     private final MemberRepository memberRepository ;
 
-    @Autowired
+
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
-    //È¸¿ø°¡ÀÔ
+    //íšŒì›ê°€ì…
     public Long join(Member member) {
 
-        validateDuplicateMember(member); //Áßº¹ È¸¿ø °ËÁõ
+        validateDuplicateMember(member); //ì¤‘ë³µ íšŒì› ê²€ì¦
         memberRepository.save(member);
         return member.getId();
     }
 
     private void validateDuplicateMember(Member member) {
-        // °°Àº ÀÌ¸§ÀÌ ÀÖ´Â Áßº¹ È¸¿øX
+        // ê°™ì€ ì´ë¦„ì´ ìˆëŠ” ì¤‘ë³µ íšŒì›X
 //        Optional<Member> result = memberRepository.findByName(member.getName());
 //        result.ifPresent(m -> {
 //            throw new IllegalArgumentException("This member already exists.");
 //        });
-//      À§ ÁÖ¼®µÈ ÄÚµå¸¦ ¾Æ·¡¿Í °°ÀÌ ÁÙ¿©¾µ ¼ö ÀÖ´Ù
+//      ìœ„ ì£¼ì„ëœ ì½”ë“œë¥¼ ì•„ë˜ì™€ ê°™ì´ ì¤„ì—¬ì“¸ ìˆ˜ ìˆë‹¤
         memberRepository.findByName(member.getName())
                 .ifPresent(m -> {
             throw new IllegalStateException("This member already exists.");
         });
     }
 
-    // ÀüÃ¼ È¸¿ø Á¶È¸
+    // ì „ì²´ íšŒì› ì¡°íšŒ
     public List<Member> findMembers() {
 
         return memberRepository.findAll();
