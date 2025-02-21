@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Transactional
 public class MemberService {
-    private final MemberRepository memberRepository ;
+    private final MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
@@ -35,8 +35,8 @@ public class MemberService {
 //      위 주석된 코드를 아래와 같이 줄여쓸 수 있다
         memberRepository.findByName(member.getName())
                 .ifPresent(m -> {
-            throw new IllegalStateException("This member already exists.");
-        });
+                    throw new IllegalStateException("This member already exists.");
+                });
     }
 
     // 전체 회원 조회
